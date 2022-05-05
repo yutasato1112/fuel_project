@@ -46,35 +46,19 @@
         $distance = $_GET['distance'];
 
         try {
-            $conn = "host=ec2-52-86-56-90.compute-1.amazonaws.com dbname=d2iqphapr6gh21 user=jhhlglwtokdznp password=709cb5ce0d25b460d4a517315df49c1be396b507b30a868565d93057b8da46e8";
+            $conn = "host=ec2-34-227-120-79.compute-1.amazonaws.com dbname=d179rc1nokp593 user=vcfevfhdquolnz password=283ce561335e66e891dce180f042308031f6e8be2942f44332025848f21e20e1
+            ";
             $link = pg_connect($conn);
-            echo pg_query("SELECT schemaname, tablename from pg_tables");
             if (!$link) {
                 die('接続失敗です。' . pg_last_error());
             }
             // PostgreSQLに対する処理
             $result = pg_query("SELECT * FROM car_data");
-            $item_count = pg_query("SELECT COUNT (*) FROM item WHERE item_name LIKE '%$keyword%' AND item_status is true");
-            while ($row_count = pg_fetch_array($item_count)) {
-                $count = $row_count['count'];
-                print "<p class=count_result>検索結果は'$count'件です</p>";
-            }
-            print "<div class=space></div>";
-            print "<ul class=cardUnit>";
             while ($row = pg_fetch_array($result)) {
-                $item_id = $row['item_id'];
-                print "<li class=card>";
-                print "<a href=detail.php?res_name=$item_id>";
-                $pic = $row['item_pic'];
-                $name = $row['item_name'];
-                $price = $row['item_price'];
-                print "<img src=$pic alt=>";
-                print "<p>商品名 $name</p>";
-                print "<p>価格 $price</p>";
-                print "</a>";
-                print "</li>";
+                $count = $row['car'];
+                print "<p>$count</p>";
+            
             }
-            print "</ul>";
         } catch (PDOException $e) {
             print('Error:' . $e->getMessage());
             die();
