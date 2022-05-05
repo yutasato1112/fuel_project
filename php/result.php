@@ -53,7 +53,7 @@
                 die('接続失敗です。' . pg_last_error());
             }
             // PostgreSQLに対する処理
-            $result = pg_query("SELECT * FROM item WHERE item_name LIKE '%$keyword%' AND item_status is true");
+            $result = pg_query("SELECT * FROM car_data");
             $item_count = pg_query("SELECT COUNT (*) FROM item WHERE item_name LIKE '%$keyword%' AND item_status is true");
             while ($row_count = pg_fetch_array($item_count)) {
                 $count = $row_count['count'];
