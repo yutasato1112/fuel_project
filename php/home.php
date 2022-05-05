@@ -45,21 +45,21 @@
             <div class="row mb-2">
                 <label for="formControlInput" class="col-sm-3 form-label">メーカー：</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="car">
+                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="maker" pattern= "[^#&?=%\+_'.,]+">
                 </div>
             </div>
 
             <div class="row mb-2">
                 <label for="formControlInput" class="col-sm-3 form-label">車種：</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="car">
+                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="cartype" pattern= "[^#&?=%\+_'.,]+">
                 </div>
             </div>
 
             <div class="row mb-2">
                 <label for="formControlInput" class="col-sm-3 form-label">走行距離：</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="distance">
+                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="distance" pattern= "[^#&?=%\+_'.,]+">
                 </div>
             </div>
             <button type="submit" class="btn btn-success btn-lg d-grid gap-2 col-6 mx-auto">検索</button>
