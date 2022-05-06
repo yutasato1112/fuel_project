@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Luxurious+Roman&display=swap" rel="stylesheet">
     <title>ホーム</title>
 </header>
-　
+
 
 <body>
     <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
@@ -59,7 +59,7 @@
             <div class="row mb-2">
                 <label for="formControlInput" class="col-sm-3 form-label">走行距離：</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="formControlInput" placeholder="" name="distance" pattern= "[^#&?=%\+_'.,]+">
+                    <input type="text" class="form-control" id="formControlInput" placeholder="km単位で入力してください。例：10000km → 10000" name="distance" pattern= "[^#&?=%\+_'.,]+">
                 </div>
             </div>
             <button type="submit" class="btn btn-success btn-lg d-grid gap-2 col-6 mx-auto">検索</button>
@@ -73,5 +73,6 @@
         <p class="copy_right">©yutasato & yukioda</p>
     </div>
     <!--ここまで-->
+
 
     <body>
