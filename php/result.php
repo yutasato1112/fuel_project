@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Luxurious+Roman&display=swap" rel="stylesheet">
-    <title>ホーム</title>
+    <title>結果</title>
 </header>
 
 <body>
@@ -263,6 +263,7 @@
                     echo "<div class=\"col-3\">${actual_fuel_cost} 円</div>";
                     echo "<div class=\"col\"></div>";
                     echo "</div>";
+
                 }
 
                 /*
@@ -298,6 +299,7 @@
         }
         ?>
         <div class="space"></div>
+        <p>理想燃費はWLTCモード燃費、JC08モード燃費、10・15モード燃費のうち最も数字が良いものを採用しています。</p>
         <button type="button" onclick="location.href='home.php'" class="btn btn-success btn-lg d-grid gap-2 col-6 mx-auto">戻る</button>
         <div class="space_f"></div>
 
