@@ -42,8 +42,6 @@
     <div class="search">
         <div class="search_title">車種検索</br></div>
         <?php
-        //テストエリア
-        //ここまで 
         $maker = $_GET['maker'];
         $cartype = $_GET['cartype'];
         $distance = $_GET['distance'];
@@ -81,8 +79,8 @@
                     $row = pg_fetch_array($result);
                     if ($row == 0) {
                         echo "<div class=\"error_message\">エラー：\"${cartype}\"がデータベースに存在しません。</div>";
-                    } elseif (count($row)>10) {
-                        $duplicate = count($row)/10;
+                    } elseif (count($row) > 10) {
+                        $duplicate = count($row) / 10;
                         echo "<div class=\"error_message\">エラー：\"${cartype}\"がデータベースに複数(${duplicate})存在します。</br>メーカー名を入力してください。</div>";
                         echo "<div class=\"result_title\">${cartype}のメーカー名一覧</div>";
                         echo "<div class=\"row row-cols-3 result\">";
@@ -181,92 +179,91 @@
                     $row = pg_fetch_array($result);
                     if ($row == 0) {
                         echo "<div class=\"error_message\">エラー：\"${maker}\"の\"${cartype}\"はデータベースに存在しません。</div>";
-                    } else
+                    } else {
                         $maker_output = $row['maker'];
-                    $car = $row['car'];
-                    $ideal_fuel = $row['ideal_fuel'];
-                    $actual_fuel = $row['actual_fuel'];
-                    $fuel_kinds = $row['fuel_kinds'];
-                    switch ($fuel_kinds) {
-                        case "ハイオク":
-                            $litre = $high_octane;
-                            break;
-                        case "レギュラー":
-                            $litre = $regular;
-                            break;
-                        case "軽油":
-                            $litre = $diesel;
+                        $car = $row['car'];
+                        $ideal_fuel = $row['ideal_fuel'];
+                        $actual_fuel = $row['actual_fuel'];
+                        $fuel_kinds = $row['fuel_kinds'];
+                        switch ($fuel_kinds) {
+                            case "ハイオク":
+                                $litre = $high_octane;
+                                break;
+                            case "レギュラー":
+                                $litre = $regular;
+                                break;
+                            case "軽油":
+                                $litre = $diesel;
+                        }
+                        $ideal_fuel_cost = round((float)$distance / $ideal_fuel * $litre, 1);
+                        $actual_fuel_cost = round((float)$distance / $actual_fuel * $litre, 1);
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">メーカー名</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${maker_output}</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">車種</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${car}</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">走行距離</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${distance} km</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">理想燃費</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${ideal_fuel} km/L</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">実燃費</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${actual_fuel} km/L</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">油種</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${fuel_kinds}</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">理想燃費燃料代</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${ideal_fuel_cost} 円</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
+
+                        echo "<div class=\"row row-cols-9 result\">";
+                        echo "<div class=\"col\"></div>";
+                        echo "<div class=\"col-3\">実燃費燃料代</div>";
+                        echo "<div class=\"col\">:</div>";
+                        echo "<div class=\"col-3\">${actual_fuel_cost} 円</div>";
+                        echo "<div class=\"col\"></div>";
+                        echo "</div>";
                     }
-                    $ideal_fuel_cost = round((float)$distance / $ideal_fuel * $litre, 1);
-                    $actual_fuel_cost = round((float)$distance / $actual_fuel * $litre, 1);
 
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">メーカー名</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${maker_output}</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">車種</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${car}</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">走行距離</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${distance} km</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">理想燃費</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${ideal_fuel} km/L</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">実燃費</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${actual_fuel} km/L</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">油種</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${fuel_kinds}</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">理想燃費燃料代</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${ideal_fuel_cost} 円</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                    echo "<div class=\"row row-cols-9 result\">";
-                    echo "<div class=\"col\"></div>";
-                    echo "<div class=\"col-3\">実燃費燃料代</div>";
-                    echo "<div class=\"col\">:</div>";
-                    echo "<div class=\"col-3\">${actual_fuel_cost} 円</div>";
-                    echo "<div class=\"col\"></div>";
-                    echo "</div>";
-
-                }
-
-                /*
+                    /*
                     $maker_output = $row['maker'];
                     $car = $row['car'];
                     $ideal_fuel = $row['ideal_fuel'];
@@ -285,19 +282,22 @@
                     print "<p>実燃費燃料代 $actual_fuel_cost</p>";
                     */
 
-                /*
+                    /*
                 $result = pg_query("SELECT * FROM car_data");
                 while ($row = pg_fetch_array($result)) {
                     $count = $row['car'];
                     print "<p>$count</p>";
                 }
                 */
+                }
             } catch (PDOException $e) {
                 print('Error:' . $e->getMessage());
                 die();
             }
         }
         ?>
+
+
         <div class="space"></div>
         <p>理想燃費はWLTCモード燃費、JC08モード燃費、10・15モード燃費のうち最も数字が良いものを採用しています。</p>
         <button type="button" onclick="location.href='home.php'" class="btn btn-success btn-lg d-grid gap-2 col-6 mx-auto">戻る</button>
